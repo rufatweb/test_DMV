@@ -64,6 +64,35 @@ export const VehicleActions = {
         });
       });
   },
+  selectVehicle: function(id) {
+    Dispatcher.dispatch({
+      actionType: "selecting_vehicle"
+    });
+    let uri = "https://sstack.crm.dynamics.com/api/data/v9.1/madmv_ma_customers?$filter=madmv_vehicleid%20eq%20"+ id;;
+    let config = {
+        'OData-MaxVersion': 4.0,
+        'OData-Version': 4.0,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json; charset=utf-8'
+    }
+
+    // make axios put call
+    axios.get(uri, config)
+        .then(res => {
+          console.log(res);
+            Dispatcher.dispatch({
+                actionType: "selected_successfully",
+                data: res.data
+            });
+        })
+        .catch( (error) => {
+            console.log(error);
+            Dispatcher.dispatch({
+                actionType: "selected_failed"
+            });
+        });
+
+},
   deleteVehicle: function(person) {
     Dispatcher.dispatch({
       actionType: "deleting_vehicle"
