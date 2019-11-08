@@ -68,7 +68,7 @@ export const VehicleActions = {
     Dispatcher.dispatch({
       actionType: "selecting_vehicle"
     });
-    let uri = "https://sstack.crm.dynamics.com/api/data/v9.1/madmv_ma_customers?$filter=madmv_vehicleid%20eq%20"+ id;;
+    let uri = "https://sstack.crm.dynamics.com/api/data/v9.1/madmv_ma_vehicles?$filter=madmv_vehicleid%20eq%20"+ id;;
     let config = {
         'OData-MaxVersion': 4.0,
         'OData-Version': 4.0,
