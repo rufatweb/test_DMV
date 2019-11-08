@@ -1,6 +1,6 @@
 import React from "react";
 import { Person } from "./Person";
-import { ActionsForPeople } from "../../Actions/AllActions";
+import { ActionsForPeople } from "../Actions/CustomerActions";
 import PropTypes from "prop-types";
 
 export class People extends React.Component {

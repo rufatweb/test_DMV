@@ -1,5 +1,5 @@
 import React from "react";
-import { ActionsForSearcher } from "../../Actions/AllActions";
+import { ActionsForSearcher } from "../Actions/CustomerActions";
 import PropTypes from "prop-types";
 import { SearchedFor } from "./SearchedFor";
 

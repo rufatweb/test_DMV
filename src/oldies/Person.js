@@ -27,8 +27,7 @@ export class Person extends React.Component {
         <td> {this.details.bday} </td>
         <td> {this.details.email} </td>
         <td>
-          {" "}
-          <Modal {...this.details} />{" "}
+          <Modal {...this.details} />
         </td>
       </tr>
     );
