@@ -10,6 +10,12 @@ let _vehicles = {
     success: false,
     failure: false
   },
+  selectedVehicle: {
+    data: {},
+    pending: false,
+    success: false,
+    failure: false
+  },
   creationStatus: {
     id: "",
     pending: false,
@@ -40,6 +46,9 @@ class StoreForVehicles extends EventEmitter {
   }
   getAll() {
     return _vehicles.allVehicles;
+  }
+  selectedVehicle() {
+    return _vehicles.selectedVehicle;
   }
   newVehicle() {
     return _vehicles.creationStatus;
@@ -80,6 +89,22 @@ Dispatcher.register(action => {
       _vehicles.allVehicles.pending = true;
       ForVehicles.emitChange();
       break;
+    case "selecting_vehicle":
+        ForVehicles.resetReadState(_vehicles.selectedVehicle);
+        _vehicles.selectedVehicle.pending = true;
+        ForVehicle.emitChange();
+        break;
+    case "selected_successfully":
+        ForVehicles.resetReadState(_vehicles.selectedVehicle);
+        _vehicles.selectedVehicle.data = action.data;
+        _vehicles.selectedVehicle.success = true;
+        ForVehicles.emitChange();
+        break;
+    case "selected_failed":
+        ForVehicles.resetReadState(_vehicles.selectedVehicle);
+        _vehicles.selectedVehicle.failure = true;
+        ForVehicles.emitChange();
+        break;  
 
     //***ACTIONS FOR CREATING***\\
     case "create_vehicle_success":

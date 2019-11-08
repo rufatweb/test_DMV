@@ -10,6 +10,12 @@ let _applications = {
     success: false,
     failure: false
   },
+  selectedApplication: {
+    data: {},
+    pending: false,
+    success: false,
+    failure: false
+  },
   creationStatus: {
     id: "",
     pending: false,
@@ -40,6 +46,9 @@ class StoreForApplications extends EventEmitter {
   }
   getAll() {
     return _applications.allApplications;
+  }
+  getSelected() {
+    return _applications.selectedApplication;
   }
   newApplication() {
     return _applications.creationStatus;
@@ -78,6 +87,22 @@ Dispatcher.register(action => {
     case "gathering_application_list":
       ForApplications.resetReadState(_applications.allApplications);
       _applications.allApplications.pending = true;
+      ForApplications.emitChange();
+      break;
+    case "selecting_application":
+      ForApplications.resetReadState(_applications.selectedApplication);
+      _applications.selectedApplication.pending = true;
+      ForApplications.emitChange();
+      break;
+    case "selected_successfully":
+      ForApplications.resetReadState(_applications.selectedApplication);
+      _applications.selectedApplication.data = action.data;
+      _applications.selectedApplication.success = true;
+      ForApplications.emitChange();
+      break;
+     case "selected_failed":
+      ForApplications.resetReadState(_applications.selectedApplication);
+      _applications.selectedApplication.failure = true;
       ForApplications.emitChange();
       break;
 

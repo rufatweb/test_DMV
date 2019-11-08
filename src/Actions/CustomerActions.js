@@ -93,7 +93,6 @@ export const CustomerActions = {
             });
         });
 
-},
   },
   deleteCustomer: function(person) {
     Dispatcher.dispatch({

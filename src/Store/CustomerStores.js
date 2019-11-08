@@ -10,6 +10,12 @@ let _customers = {
     success: false,
     failure: false
   },
+  selectedCustomer: {
+    data: {},
+    pending: false,
+    success: false,
+    failure: false
+  },
   creationStatus: {
     id: "",
     pending: false,
@@ -22,6 +28,11 @@ let _customers = {
     failure: false
   },
   deleteStatus: {
+    pending: false,
+    success: false,
+    failure: false
+  },
+  selectStatus: {
     pending: false,
     success: false,
     failure: false
@@ -40,6 +51,9 @@ class StoreForCustomers extends EventEmitter {
   }
   getAll() {
     return _customers.allCustomers;
+  }
+  getSelected() {
+    return _customers.selectedCustomer;
   }
   newCustomer() {
     return _customers.creationStatus;
@@ -80,6 +94,22 @@ Dispatcher.register(action => {
       _customers.allCustomers.pending = true;
       ForCustomers.emitChange();
       break;
+    case "selecting_customer":
+        ForCustomers.resetReadState(_customers.selectedCustomer);
+        _customers.selectedCustomer.pending = true;
+        ForCustomers.emitChange();
+        break;
+    case "selected_successfully":
+        ForCustomers.resetReadState(_customers.selectedCustomer);
+        _customers.selectedCustomer.data = action.data;
+        _customers.selectedCustomer.success = true;
+        ForCustomers.emitChange();
+        break;
+    case "selected_failed":
+        ForCustomers.resetReadState(_customers.selectedCustomer);
+        _customers.selectedCustomer.failure = true;
+        ForCustomers.emitChange();
+        break;  
 
     //***ACTIONS FOR CREATING***\\
     case "create_customer_success":
