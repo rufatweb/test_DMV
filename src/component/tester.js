@@ -34,7 +34,7 @@
 // //       </div>
 // //     );
 // //   }
-// // }  
+// // }
 
 // // class Toggle extends React.Component {
 // //   constructor(props) {
@@ -65,11 +65,10 @@
 // //     toggle: Toggle
 // // }
 
-
 // // export const App = () => {
 // //     const Test = tester['toggle'];
 
-// //     return ( 
+// //     return (
 // //         <div>
 // //             <Test/>
 // //             <Toggle/>
@@ -77,11 +76,9 @@
 // //     )
 // // }
 
-
-
 // export const App = () => {
 //   const modalProps = {
-//     triggerText: 'This is a button'    
+//     triggerText: 'This is a button'
 //   };
 
 //   return (
@@ -106,7 +103,7 @@
 //     }
 //     this.onOpen = this.onOpen.bind(this);
 //     this.onClose = this.onClose.bind(this);
-//   }  
+//   }
 
 //   onOpen() {
 //     this.setState({ isOpen: true });
@@ -117,7 +114,7 @@
 
 //   render() {
 //     const { isOpen } = this.state;
-//     const { triggerText } = this.props; 
+//     const { triggerText } = this.props;
 //     return (
 //       <Fragment>
 //         <ModalTrigger
@@ -125,7 +122,7 @@
 //           text={triggerText}
 //         />
 //         {isOpen &&
-//           <ModalContent 
+//           <ModalContent
 //             onClose={this.onClose}
 //           />
 //         }
@@ -151,3 +148,211 @@
 //     document.body
 //   );
 // }
+
+import React, { Component, Fragment } from "react";
+import {
+  MDBContainer,
+  MDBBtn,
+  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
+  MDBModalFooter,
+  MDBInput,
+  MDBInputGroup,
+  MDBAnimation,
+  MDBCardImage,
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarNav,
+  MDBNavbarToggler,
+  MDBCollapse,
+  MDBFormInline,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+} from "mdbreact";
+import { BrowserRouter } from "react-router-dom";
+
+class ModalPage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      modal: false
+    };
+    this.toggle = this.toggle.bind(this);
+  }
+
+  toggle() {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <NavbarPage />
+        <MDBContainer>
+          {/* BUTTON */}
+          <MDBBtn color="primary" onClick={this.toggle}>
+            Click
+          </MDBBtn>
+          {/* MODAL */}
+          <MDBModal
+            isOpen={this.state.modal}
+            toggle={this.toggle}
+            backdrop={false}
+            size="fluid"
+            full-height
+            position="bottom"
+          >
+            <MDBModalHeader toggle={this.toggle}>MDBModal title</MDBModalHeader>
+            <MDBModalBody>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </MDBModalBody>
+            <MDBModalFooter>
+              <MDBBtn color="secondary" onClick={this.toggle}>
+                Close
+              </MDBBtn>
+              <MDBBtn color="primary">Save changes</MDBBtn>
+            </MDBModalFooter>
+          </MDBModal>
+        </MDBContainer>
+        <WavesPage />
+        <InputPage />
+        <SpinnerPage />
+      </div>
+    );
+  }
+}
+export default ModalPage;
+
+const InputPage = () => {
+  return (
+    <MDBContainer>
+      <MDBInputGroup
+        material
+        containerClassName="mb-3 mt-0"
+        prepend="@"
+        hint="Username"
+      />
+      <MDBInputGroup
+        material
+        hint="Recipient's username"
+        containerClassName="mb-3 mt-0"
+        append="@example.com"
+      />
+      <MDBInputGroup
+        material={true}
+        label="Your vanity URL"
+        labelClassName="mb-0 ml-2"
+        containerClassName="mb-3 mt-0"
+        prepend="https://example.com/users/"
+        id="basic-url-material"
+      />
+      <MDBInputGroup
+        material
+        containerClassName="mb-3"
+        prepend="$"
+        append=".00"
+      />
+      <MDBInputGroup
+        material
+        className="mb-0"
+        prepend="With textarea"
+        type="textarea"
+      />
+    </MDBContainer>
+  );
+};
+
+const WavesPage = () => {
+  return (
+    <div>
+      <MDBBtn color="primary">Click me</MDBBtn>
+
+      <MDBCardImage className="img-fluid" waves />
+    </div>
+  );
+};
+
+const SpinnerPage = () => {
+  return (
+    <Fragment>
+      <div className="spinner-grow text-primary" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+      <div className="spinner-grow text-success" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+      <div className="spinner-grow text-danger" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+      <div className="spinner-grow text-warning" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+      <div className="spinner-grow text-info" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+      <div className="spinner-border text-primary" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+    </Fragment>
+  );
+};
+
+// getInitialState: function() {
+//     return { activeTabClassName: "tab1" };
+// }
+
+// render: function() {
+//     return (
+//         <ul>
+//             <li className={(this.state.activeTabClassName === "tab1") ? "active" : ""}></li>
+//             <li className={(this.state.activeTabClassName === "tab2") ? "active" : ""}></li>className            </ul>
+//     );
+// }
+
+class NavbarPage extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isOpen: false
+    };
+
+    this.toggleCollapse = this.toggleCollapse.bind(this);
+  }
+
+  toggleCollapse() {
+    this.setState({ isOpen: !this.state.isOpen });
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <MDBNav className="nav-tabs nav-justified">
+          <MDBNavItem>
+            <MDBNavLink active to="/">
+              Active
+            </MDBNavLink>
+          </MDBNavItem>
+          <MDBNavItem>
+            <MDBNavLink to="#!">Longer nav link</MDBNavLink>
+          </MDBNavItem>
+          <MDBNavItem>
+            <MDBNavLink to="#!">Link</MDBNavLink>
+          </MDBNavItem>
+          <MDBNavItem>
+            <MDBNavLink disabled to="#!">
+              Disabled
+            </MDBNavLink>
+          </MDBNavItem>
+        </MDBNav>
+      </BrowserRouter>
+    );
+  }
+}
